@@ -1,0 +1,42 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+*,
+*::before,
+*::after {  
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // This define what 1rem is.
+    font-size: 62.5%; // 1rem = 10px, (10px / 16px) * 100 = 62.5%
+
+    @include mix.respond(tab-land) {
+        font-size: 56.25%; // 1rem = 9px, (9px / 16px) * 100 = 56.25%
+    }
+
+    @include mix.respond(tab-port) {
+        font-size: 50%; // 1rem = 8px, (8px / 16px) * 100 = 50%
+    }
+
+    @include mix.respond(big-desktop) {
+        font-size: 75%; // 1rem = 12px, (12px / 16px) * 100 = 75%
+    }
+}
+
+body {
+    padding: 3rem;
+    box-sizing: border-box;
+
+    @include mix.respond(tab-port) {
+        padding: 0;
+    }
+}
+
+
+::selection {
+    background-color: var.$color-primary;
+    color: var.$color-white;
+}

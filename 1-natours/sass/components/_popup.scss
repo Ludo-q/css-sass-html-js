@@ -1,0 +1,150 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    background-color: rgba($color: var.$color-black, $alpha: .8);
+    z-index: 9999;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color: var.$color-black, $alpha: .3);
+    }
+
+    @include mix.respond(tab-port) {
+        overflow: auto;
+    }
+
+    &__content {
+        display: table;
+        @include mix.absCenter;
+
+        background-color: var.$color-white;
+        border-radius: 3px;
+        box-shadow: 0 2rem 4rem rgba($color: var.$color-black, $alpha: .2);
+
+        width: 75%;
+        overflow: hidden;
+
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+
+        transition: all .5s .2s;
+
+        @include mix.respond(tab-land) {
+            padding: 0 4rem 4rem 4rem;
+        }
+
+        @include mix.respond(tab-port) {
+            padding: 3rem;
+            overflow: auto;
+        }
+    }
+
+    &__left {
+        display: table-cell;
+        width: 33.33333%;
+
+        @include mix.respond(tab-land) {
+            display: table-row;
+            text-align: center;
+            border-spacing: 2rem;
+        }
+    }
+
+    &__right {
+        display: table-cell;
+        vertical-align: middle;
+        width: 66.666667%;
+        padding: 3rem 5rem;
+
+        @include mix.respond(tab-land) {
+            display: table-row;
+            text-align: center;
+        }
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+
+        @include mix.respond(tab-land) {
+            display: unset;
+            width: 36%;
+        }
+
+        @include mix.respond(tab-port) {
+            display: block;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        @include mix.respond(phone) {
+            width: 60%;
+        }
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid var.$color-gray-light-2;
+
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+
+        @include mix.respond(tab-port) {
+            column-count: 1;
+        }
+    }
+
+    // Need to see this target pseudo class. The target id is in the url
+    // An <a> element can target another element by id
+
+    // open state
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            display: inline-block;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+
+            color: var.$color-gray-dark;
+            font-size: 3rem;
+            text-decoration: none;
+            line-height: 1;
+            transition: color .2s;
+        }
+
+        &:hover,
+        &:active {
+            color: var.$color-primary;
+        }
+    }
+
+}

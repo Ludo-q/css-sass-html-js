@@ -1,0 +1,42 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+.feature-box {
+    
+    // to make the background a bit transparent
+    background-color: rgba($color: var.$color-white, $alpha: .8);
+
+    font-size: 1.5rem;
+    text-align: center;
+
+    padding: 2.5rem;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color: var.$color-black, $alpha: .15);
+
+    transition: transform .3s;
+
+    @include mix.respond(tab-port) {
+        padding: 2.5rem;
+    }
+
+    &__icon {
+        display: inline-block;
+        margin-bottom: .5rem;
+        font-size: 6rem;
+        color: transparent;
+        background-image: linear-gradient(to right, var.$color-primary-light, var.$color-primary-dark);
+        -webkit-background-clip: text;
+        
+        @include mix.respond(tab-port) {
+            margin-bottom: 0;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+
+    &__text {
+
+    }
+}

@@ -1,0 +1,59 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+.header {
+    position: relative;
+    height: 85vh;
+    background-image: linear-gradient(
+        to right bottom, 
+        rgba(var.$color-primary-light, 0.8), 
+        rgba(var.$color-primary-dark, 0.8)), 
+        url(../img/hero-small.jpg);
+    background-size: cover;
+    background-position: top;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)){
+        height: 95vh;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    }
+
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+           //    to work in safari
+           only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+           only screen and (min-width: 125em) {
+        background-image: linear-gradient(
+        to right bottom, 
+        rgba(var.$color-primary-light, 0.8), 
+        rgba(var.$color-primary-dark, 0.8)), 
+        url(../img/hero.jpg);
+    }
+
+    @include mix.respond(phone) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+    
+    &__logo {
+        height: 3.5rem;
+    }
+
+    &__logo:hover {
+        animation: moveInLeft 2.2s ease-out;
+    }
+
+    &__text-box {
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+    
+        text-align: center;
+    }
+}

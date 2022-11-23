@@ -1,0 +1,13 @@
+
+# Node Modules
+/1-natours/node_modules
+/2-trillo/node_modules
+/3-nexter/node_modules
+
+# IntellJ IDE
+.idea/
+
+# Visual Studio Code
+/3-nexter/.vscode
+
+
